@@ -2,9 +2,11 @@ package com.vti.helloworld.controller;
 
 import com.vti.helloworld.entity.Department;
 import com.vti.helloworld.modal.DepartmentCreateDto;
+import com.vti.helloworld.modal.DepartmentSearchDto;
 import com.vti.helloworld.modal.DepartmentUpdateDto;
 import com.vti.helloworld.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,11 @@ public class DepartmentController {
     @GetMapping
     public List<Department> getAll() {
         return departmentService.getAll();
+    }
+
+    @GetMapping("/search")
+    public Page<Department> search(DepartmentSearchDto request) {
+        return departmentService.search(request);
     }
 
     @PostMapping("/create")
@@ -39,5 +46,10 @@ public class DepartmentController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable(value = "id") int id) {
         departmentService.delete(id);
+    }
+
+    @GetMapping("/searchNoPage")
+    public List<Department> findAllByDepartmentNameContains(@RequestParam(value = "name") String departmentName) {
+        return departmentService.findAllByDepartmentNameContains(departmentName);
     }
 }
