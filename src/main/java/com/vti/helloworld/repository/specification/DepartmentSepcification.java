@@ -39,4 +39,6 @@ public class DepartmentSepcification {
             return criteriaBuilder.lessThanOrEqualTo(root.get("createDate"), request.getToDate());
         });
     }
+
+
 }

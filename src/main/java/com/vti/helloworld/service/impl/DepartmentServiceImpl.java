@@ -1,6 +1,7 @@
 package com.vti.helloworld.service.impl;
 
 import com.vti.helloworld.entity.Department;
+import com.vti.helloworld.exception.LogicCustomException;
 import com.vti.helloworld.modal.DepartmentCreateDto;
 import com.vti.helloworld.modal.DepartmentSearchDto;
 import com.vti.helloworld.modal.DepartmentUpdateDto;
@@ -52,7 +53,10 @@ public class DepartmentServiceImpl implements DepartmentService{
         Department checker = departmentRepository.findByDepartmentName(dto.getDepartmentName());
         if (checker != null) {
             System.err.println("Department đã tồn tại!");
-            return null;
+            LogicCustomException exception = new LogicCustomException();
+            exception.setCode(500);
+            exception.setMessage("phong ban da ton tai");
+            throw exception;
         }
         Department entity = new Department();
         entity.setDepartmentName(dto.getDepartmentName());

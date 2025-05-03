@@ -1,16 +1,15 @@
 package com.vti.helloworld.controller;
 
 import com.vti.helloworld.entity.User;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.SQLOutput;
 
 @RestController
 @RequestMapping("/test")
 public class DemoController {
 
     @GetMapping
-    public String test(@RequestParam(value = "x", required = false) String username, @RequestParam(value = "y") String password) {
+    public ResponseEntity<String> test(@RequestParam(value = "x", required = false) String username, @RequestParam(value = "y") String password) {
         //day la 1 chuc nang
 //        tu giao dien muon truy cap vao method nay
         // de thuc hien 1 chuc nang
@@ -18,7 +17,7 @@ public class DemoController {
         //Khi khong khai bao j them hoac la @RequestParam thi bien se duoc lay tu params
         System.out.println("username: " + username);
         System.out.println("password: " + password);
-        return "Hello World";
+        return ResponseEntity.ok("Hello World 1");
     }
 
     @GetMapping("/hello")
