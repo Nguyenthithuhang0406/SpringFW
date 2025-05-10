@@ -8,6 +8,7 @@ import com.vti.helloworld.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/department")
 @Validated
+@CrossOrigin("http://localhost:5173")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Department> getAll() {
         return departmentService.getAll();
     }
